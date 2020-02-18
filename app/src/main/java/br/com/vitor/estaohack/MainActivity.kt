@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
         val minhaPreferencia = getSharedPreferences("cadastro",Context.MODE_PRIVATE)
 
         txvEmail.text = minhaPreferencia.getString("email","erro no email")
-        txvNome.text = minhaPreferencia.getString("email","erro no nome")
-        txvSexo.text = minhaPreferencia.getString("email", "erro no sexo")
+        txvNome.text = minhaPreferencia.getString("nome","erro no nome")
+        txvSexo.text = minhaPreferencia.getString("sexo", "erro no sexo")
 
 
     }
