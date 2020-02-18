@@ -1,5 +1,7 @@
 package br.com.vitor.estaohack
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -38,11 +40,12 @@ class CadastroActivity : AppCompatActivity() {
             val sobrenome = edtSobreNomeCadastro.text.toString().trim().toLowerCase()
             val email = edtEmail.text.toString().trim()
             val senha = edtSenha.text.toString().trim()
-            val sexo = spnSexo.selectedItem
+            val sexo = spnSexo.selectedItem.toString()
 
             if (nome.isEmpty() ||
                 sobrenome.isEmpty() ||
-                email.isEmpty() || senha.isEmpty()
+                email.isEmpty() ||
+                senha.isEmpty()
                 || spnSexo.selectedItem == "Selecione o sexo") {
                 AlertDialog.Builder(this@CadastroActivity)
                     .setTitle("Opss algo deu errado...")
@@ -55,7 +58,17 @@ class CadastroActivity : AppCompatActivity() {
                     .show()
 
             } else {
-                    val minhaPreferencia = getSharedPreferences("cadastro")
+                    val minhaPreferencia = getSharedPreferences("cadastro", Context.MODE_PRIVATE)
+                    val meuEditor = minhaPreferencia.edit()
+
+                    meuEditor.putString("nome", nome).apply()
+                    meuEditor.putString("sobrenome", sobrenome).apply()
+                    meuEditor.putString("email", email).apply()
+                    meuEditor.putString("senha", senha).apply()
+                    meuEditor.putString("sexo", sexo).apply()
+
+                    startActivity(Intent(this@CadastroActivity, MainActivity::class.java))
+
 
 
             }
